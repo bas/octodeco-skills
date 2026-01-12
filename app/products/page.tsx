@@ -1,19 +1,11 @@
 import Image from "next/image";
 import type { Metadata } from "next";
+import type { Product } from "../../types/product";
 
 export const metadata: Metadata = {
   title: "Products - Octodeco",
   description: "Browse our collection of unique Octocat products",
 };
-
-interface Product {
-  id: number;
-  name: string;
-  description: string;
-  price: number;
-  image: string;
-}
-
 const products: Product[] = [
   {
     id: 1,
