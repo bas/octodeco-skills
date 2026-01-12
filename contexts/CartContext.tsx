@@ -34,7 +34,6 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     
     if (savedCart) {
       try {
-        // eslint-disable-next-line react-hooks/set-state-in-effect
         setItems(JSON.parse(savedCart));
       } catch (e) {
         console.error('Failed to load cart from localStorage', e);
@@ -43,7 +42,6 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     
     if (savedCoupon) {
       try {
-        // eslint-disable-next-line react-hooks/set-state-in-effect
         setCoupon(JSON.parse(savedCoupon));
       } catch (e) {
         console.error('Failed to load coupon from localStorage', e);
