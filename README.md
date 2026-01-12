@@ -52,7 +52,7 @@ To run tests:
 
 ```bash
 # Install test dependencies
-pip install playwright pytest-playwright
+pip install playwright
 playwright install chromium
 
 # Start dev server in one terminal
