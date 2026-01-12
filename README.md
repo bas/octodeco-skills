@@ -46,7 +46,11 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 
 ## Testing
 
-The application includes comprehensive UI tests. See [tests/README.md](tests/README.md) for details.
+The application includes comprehensive UI tests that run automatically in CI/CD.
+
+### Running Tests Locally
+
+See [tests/README.md](tests/README.md) for details.
 
 To run tests:
 
@@ -61,6 +65,17 @@ npm run dev
 # Run tests in another terminal
 python tests/test_ui.py
 ```
+
+### CI/CD Testing
+
+UI tests run automatically on every pull request and push to main. The workflow:
+1. Lints and type-checks the code
+2. Builds the application
+3. Starts the Next.js production server
+4. Runs Playwright UI tests
+5. Uploads test screenshots as artifacts
+
+Check the Actions tab for test results and screenshots.
 
 ## Project Structure
 
