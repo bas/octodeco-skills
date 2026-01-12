@@ -142,7 +142,7 @@ export default function ProductsPage() {
               className="text-slate-600 dark:text-slate-400 text-lg font-medium"
               style={{ fontFamily: "'DM Sans', sans-serif" }}
             >
-              Can't find what you're looking for? More Octocats coming soon! ✨
+              Can&apos;t find what you&apos;re looking for? More Octocats coming soon! ✨
             </p>
           </div>
         </div>
