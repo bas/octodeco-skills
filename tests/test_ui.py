@@ -5,7 +5,10 @@ Tests navigation, cart functionality, and discount coupons
 """
 
 from playwright.sync_api import sync_playwright, expect
-import time
+import os
+
+# Use environment variable for base URL, default to localhost
+BASE_URL = os.getenv('BASE_URL', 'http://localhost:3000')
 
 def test_octodeco_ui():
     with sync_playwright() as p:
@@ -14,11 +17,12 @@ def test_octodeco_ui():
         page = browser.new_page()
         
         print("🧪 Starting OctoDeco UI Tests...")
+        print(f"Testing against: {BASE_URL}")
         print()
         
         # Test 1: Landing Page
         print("✓ Test 1: Landing Page")
-        page.goto('http://localhost:3000')
+        page.goto(BASE_URL)
         page.wait_for_load_state('networkidle')
         page.screenshot(path='/tmp/01-landing-page.png', full_page=True)
         
@@ -55,9 +59,8 @@ def test_octodeco_ui():
         # Add first product to cart
         first_add_button = page.locator('button:has-text("Add to Cart")').first
         first_add_button.click()
-        page.wait_for_timeout(500)
         
-        # Verify cart badge shows count
+        # Wait for cart badge to appear and show count
         cart_badge = page.locator('a[href="/cart"] span')
         expect(cart_badge).to_have_text('1')
         print("  ✓ Cart badge shows 1 item")
@@ -65,7 +68,6 @@ def test_octodeco_ui():
         # Add second product
         second_add_button = page.locator('button:has-text("Add to Cart")').nth(1)
         second_add_button.click()
-        page.wait_for_timeout(500)
         expect(cart_badge).to_have_text('2')
         print("  ✓ Cart badge updated to 2 items")
         print()
@@ -89,9 +91,8 @@ def test_octodeco_ui():
         # Increase quantity of first item
         increase_button = page.locator('button[aria-label="Increase quantity"]').first
         increase_button.click()
-        page.wait_for_timeout(500)
         
-        # Verify quantity updated
+        # Wait for quantity to update
         quantity = page.locator('.w-8.text-center').first
         expect(quantity).to_have_text('2')
         print("  ✓ Quantity increased to 2")
@@ -113,9 +114,8 @@ def test_octodeco_ui():
         coupon_input = page.locator('#coupon')
         coupon_input.fill('OCTO10')
         page.click('button:has-text("Apply")')
-        page.wait_for_timeout(500)
         
-        # Verify success message
+        # Wait for success message to appear
         success_message = page.locator('text=applied successfully')
         expect(success_message).to_be_visible()
         print("  ✓ Success message displayed")
@@ -133,7 +133,10 @@ def test_octodeco_ui():
         
         # Clear cart and add item again for fresh test
         page.click('text=Clear Cart')
-        page.wait_for_timeout(500)
+        
+        # Wait for empty cart message to appear
+        empty_message = page.locator('text=Your cart is empty')
+        expect(empty_message).to_be_visible()
         
         # Navigate back to products
         page.click('text=Products')
@@ -141,7 +144,9 @@ def test_octodeco_ui():
         
         # Add one item
         page.locator('button:has-text("Add to Cart")').first.click()
-        page.wait_for_timeout(500)
+        
+        # Wait for cart badge to update
+        expect(cart_badge).to_have_text('1')
         
         # Go to cart
         page.click('text=Cart')
@@ -150,8 +155,8 @@ def test_octodeco_ui():
         # Try invalid coupon
         page.locator('#coupon').fill('INVALID')
         page.click('button:has-text("Apply")')
-        page.wait_for_timeout(500)
         
+        # Wait for error message to appear
         error_message = page.locator('text=Invalid coupon code')
         expect(error_message).to_be_visible()
         print("  ✓ Error message displayed for invalid code")

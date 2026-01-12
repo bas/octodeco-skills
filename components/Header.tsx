@@ -2,13 +2,12 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { useCart } from '@/contexts/CartContext';
 
-interface HeaderProps {
-  cartItemCount?: number;
-}
-
-export default function Header({ cartItemCount = 0 }: HeaderProps) {
+export default function Header() {
   const pathname = usePathname();
+  const { getItemCount } = useCart();
+  const cartItemCount = getItemCount();
   
   const isActive = (path: string) => pathname === path;
   

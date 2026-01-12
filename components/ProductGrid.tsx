@@ -11,11 +11,9 @@ interface ProductGridProps {
 export default function ProductGrid({ featuredOnly = false }: ProductGridProps) {
   const { addToCart } = useCart();
   const displayProducts = featuredOnly ? products.slice(0, 4) : products;
-  const gridCols = featuredOnly ? 'xl:grid-cols-4' : 'xl:grid-cols-4';
 
   return (
-    <div className={`grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 ${gridCols}`}>
-      {displayProducts.map((product, index) => (
+    <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">{displayProducts.map((product, index) => (
         <div
           key={product.id}
           className="group relative animate-fadeInUp overflow-hidden rounded-2xl bg-white shadow-card transition-all duration-500 hover:scale-105 hover:shadow-cardHover focus-within:scale-105 focus-within:shadow-cardHover"

@@ -55,18 +55,31 @@ export function CartProvider({ children }: { children: ReactNode }) {
     return localStorage.getItem('octodeco-discount-code') || '';
   });
 
-  // Save cart to localStorage whenever it changes
-  useEffect(() => {
-    localStorage.setItem('octodeco-cart', JSON.stringify(items));
-  }, [items]);
+  // Track if initial load is complete to avoid writing back the same data we just loaded
+  const [isInitialized, setIsInitialized] = useState(false);
 
   useEffect(() => {
-    localStorage.setItem('octodeco-discount', discount.toString());
-  }, [discount]);
+    setIsInitialized(true);
+  }, []);
+
+  // Save cart to localStorage whenever it changes (skip initial render)
+  useEffect(() => {
+    if (isInitialized) {
+      localStorage.setItem('octodeco-cart', JSON.stringify(items));
+    }
+  }, [items, isInitialized]);
 
   useEffect(() => {
-    localStorage.setItem('octodeco-discount-code', discountCode);
-  }, [discountCode]);
+    if (isInitialized) {
+      localStorage.setItem('octodeco-discount', discount.toString());
+    }
+  }, [discount, isInitialized]);
+
+  useEffect(() => {
+    if (isInitialized) {
+      localStorage.setItem('octodeco-discount-code', discountCode);
+    }
+  }, [discountCode, isInitialized]);
 
   const addToCart = (product: Product) => {
     setItems((currentItems) => {

@@ -7,7 +7,7 @@ This directory contains UI tests for the OctoDeco Skills application.
 ### Prerequisites
 
 ```bash
-pip install playwright pytest-playwright
+pip install playwright
 playwright install chromium
 ```
 
@@ -23,6 +23,12 @@ Then in another terminal, run the tests:
 
 ```bash
 python tests/test_ui.py
+```
+
+To test against a different environment, set the `BASE_URL` environment variable:
+
+```bash
+BASE_URL=http://localhost:3000 python tests/test_ui.py
 ```
 
 ## Test Coverage
