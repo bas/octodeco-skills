@@ -1,65 +1,84 @@
-import Image from "next/image";
+'use client';
+
+import ProductGrid from "@/components/ProductGrid";
 
 export default function Home() {
+  const scrollToCollection = () => {
+    const collectionSection = document.getElementById('collection');
+    if (collectionSection) {
+      collectionSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
+    <div className="min-h-screen bg-cream">
+      {/* Hero Section */}
+      <header className="relative overflow-hidden bg-gradient-to-br from-coral via-peach to-sky px-6 py-24 md:py-32">
+        <div className="absolute inset-0 bg-noise opacity-40" aria-hidden="true"></div>
+        <div className="relative z-10 mx-auto max-w-7xl">
+          <div className="flex flex-col items-start gap-6">
+            <div className="animate-fadeInUp">
+              <h1 className="font-display text-6xl font-bold leading-none tracking-tight text-charcoal md:text-8xl lg:text-9xl">
+                OctoDeco
+              </h1>
+              <p className="font-handwritten text-3xl text-charcoal/80 md:text-4xl">
+                Skills & Characters
+              </p>
+            </div>
+            <p className="max-w-2xl animate-fadeInUp font-body text-lg leading-relaxed text-charcoal/90 md:text-xl" style={{ animationDelay: '0.1s' } as React.CSSProperties}>
+              Discover our curated collection of GitHub&apos;s most beloved Octocat characters. 
+              Each one tells a story, each one brings personality to your projects.
+            </p>
+            <button 
+              onClick={scrollToCollection}
+              className="group animate-fadeInUp mt-4 flex items-center gap-3 rounded-full bg-charcoal px-8 py-4 font-display text-lg font-semibold text-cream transition-all duration-300 hover:scale-105 hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-charcoal focus:ring-offset-4" 
+              style={{ animationDelay: '0.2s' } as React.CSSProperties}
+              aria-label="Scroll to collection section"
             >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+              Explore Collection
+              <span className="transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true">→</span>
+            </button>
+          </div>
+        </div>
+        {/* Decorative elements */}
+        <div className="pointer-events-none absolute right-0 top-10 h-64 w-64 animate-float rounded-full bg-white/20 blur-3xl" aria-hidden="true"></div>
+        <div className="pointer-events-none absolute left-0 bottom-20 h-80 w-80 animate-floatDelay rounded-full bg-white/20 blur-3xl" aria-hidden="true"></div>
+      </header>
+
+      {/* Product Grid Section */}
+      <main id="collection" className="mx-auto max-w-7xl px-6 py-16 md:py-24">
+        <div className="mb-12 animate-fadeInUp">
+          <h2 className="font-display text-4xl font-bold text-charcoal md:text-5xl">
+            Featured Characters
+          </h2>
+          <p className="mt-4 font-body text-lg text-charcoal/70">
+            From classic to quirky, each Octocat has its own charm
           </p>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
+        <ProductGrid />
       </main>
+
+      {/* Footer */}
+      <footer className="border-t-2 border-charcoal/10 bg-cream px-6 py-12">
+        <div className="mx-auto max-w-7xl">
+          <div className="flex flex-col items-center justify-between gap-6 md:flex-row">
+            <div>
+              <p className="font-display text-2xl font-bold text-charcoal">OctoDeco</p>
+              <p className="font-body text-sm text-charcoal/60">Skills & Characters</p>
+            </div>
+            <nav className="flex gap-8" aria-label="Footer navigation">
+              <button className="font-body text-charcoal/70 transition-colors hover:text-charcoal focus:outline-none focus:underline">About</button>
+              <button className="font-body text-charcoal/70 transition-colors hover:text-charcoal focus:outline-none focus:underline">Collection</button>
+              <button className="font-body text-charcoal/70 transition-colors hover:text-charcoal focus:outline-none focus:underline">Contact</button>
+            </nav>
+          </div>
+          <div className="mt-8 border-t border-charcoal/10 pt-8 text-center">
+            <p className="font-body text-sm text-charcoal/50">
+              © 2026 OctoDeco Skills. Celebrating GitHub&apos;s iconic characters.
+            </p>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 }
