@@ -17,6 +17,7 @@ interface CartContextType {
   getSubtotal: () => number;
   discount: number;
   applyDiscount: (code: string) => boolean;
+  removeDiscount: () => void;
   discountCode: string;
 }
 
@@ -98,7 +99,17 @@ export function CartProvider({ children }: { children: ReactNode }) {
   };
 
   const removeFromCart = (productId: number) => {
-    setItems((currentItems) => currentItems.filter((item) => item.id !== productId));
+    setItems((currentItems) => {
+      const newItems = currentItems.filter((item) => item.id !== productId);
+      
+      // Clear discount if cart becomes empty
+      if (newItems.length === 0) {
+        setDiscount(0);
+        setDiscountCode('');
+      }
+      
+      return newItems;
+    });
   };
 
   const updateQuantity = (productId: number, quantity: number) => {
@@ -141,6 +152,11 @@ export function CartProvider({ children }: { children: ReactNode }) {
     return false;
   };
 
+  const removeDiscount = () => {
+    setDiscount(0);
+    setDiscountCode('');
+  };
+
   return (
     <CartContext.Provider
       value={{
@@ -153,6 +169,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
         getSubtotal,
         discount,
         applyDiscount,
+        removeDiscount,
         discountCode,
       }}
     >

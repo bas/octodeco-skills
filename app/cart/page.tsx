@@ -14,6 +14,7 @@ export default function CartPage() {
     getSubtotal,
     discount,
     applyDiscount,
+    removeDiscount,
     discountCode,
   } = useCart();
 
@@ -192,9 +193,21 @@ export default function CartPage() {
                   <p className="mt-2 font-body text-sm text-green-600">{couponSuccess}</p>
                 )}
                 {discountCode && (
-                  <p className="mt-2 font-body text-sm text-charcoal/70">
-                    Applied: <span className="font-semibold">{discountCode}</span>
-                  </p>
+                  <div className="mt-2 flex items-center justify-between font-body text-sm text-charcoal/70">
+                    <span>
+                      Applied: <span className="font-semibold">{discountCode}</span>
+                    </span>
+                    <button
+                      onClick={() => {
+                        removeDiscount();
+                        setCouponSuccess('');
+                      }}
+                      className="text-xs font-semibold text-coral hover:underline focus:outline-none"
+                      aria-label="Remove discount code"
+                    >
+                      Remove
+                    </button>
+                  </div>
                 )}
                 <p className="mt-2 font-body text-xs text-charcoal/50">
                   Try: OCTO10, GITHUB20, or WELCOME15
