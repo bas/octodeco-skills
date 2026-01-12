@@ -1,4 +1,4 @@
-name: Lint and Build
+name: Lint, Build, and Test
 
 on:
   push:
@@ -38,3 +38,37 @@ jobs:
         env:
           # Skip telemetry during CI builds
           NEXT_TELEMETRY_DISABLED: 1
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install Playwright
+        run: |
+          pip install playwright
+          playwright install chromium --with-deps
+
+      - name: Start Next.js server
+        run: npm start &
+        env:
+          PORT: 3000
+          NEXT_TELEMETRY_DISABLED: 1
+
+      - name: Wait for server to be ready
+        run: |
+          timeout 60 bash -c 'until curl -f http://localhost:3000 > /dev/null 2>&1; do sleep 2; done'
+          echo "Server is ready!"
+
+      - name: Run UI tests
+        run: python tests/test_ui.py
+        env:
+          BASE_URL: http://localhost:3000
+
+      - name: Upload test screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-screenshots
+          path: /tmp/*.png
+          retention-days: 7

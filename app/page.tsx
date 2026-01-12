@@ -55,30 +55,8 @@ export default function Home() {
             From classic to quirky, each Octocat has its own charm
           </p>
         </div>
-        <ProductGrid />
+        <ProductGrid featuredOnly={true} />
       </main>
-
-      {/* Footer */}
-      <footer className="border-t-2 border-charcoal/10 bg-cream px-6 py-12">
-        <div className="mx-auto max-w-7xl">
-          <div className="flex flex-col items-center justify-between gap-6 md:flex-row">
-            <div>
-              <p className="font-display text-2xl font-bold text-charcoal">OctoDeco</p>
-              <p className="font-body text-sm text-charcoal/60">Skills & Characters</p>
-            </div>
-            <nav className="flex gap-8" aria-label="Footer navigation">
-              <button className="font-body text-charcoal/70 transition-colors hover:text-charcoal focus:outline-none focus:underline">About</button>
-              <button className="font-body text-charcoal/70 transition-colors hover:text-charcoal focus:outline-none focus:underline">Collection</button>
-              <button className="font-body text-charcoal/70 transition-colors hover:text-charcoal focus:outline-none focus:underline">Contact</button>
-            </nav>
-          </div>
-          <div className="mt-8 border-t border-charcoal/10 pt-8 text-center">
-            <p className="font-body text-sm text-charcoal/50">
-              © 2026 OctoDeco Skills. Celebrating GitHub&apos;s iconic characters.
-            </p>
-          </div>
-        </div>
-      </footer>
     </div>
   );
 }
