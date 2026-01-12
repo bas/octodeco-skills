@@ -196,7 +196,10 @@ export default function ProductsPage() {
                   <span className="text-xl font-bold text-zinc-900 dark:text-zinc-50">
                     ${product.price.toFixed(2)}
                   </span>
-                  <button className="rounded-full bg-zinc-900 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-zinc-800 dark:bg-zinc-50 dark:text-zinc-900 dark:hover:bg-zinc-200">
+                  <button
+                    className="rounded-full bg-zinc-900 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-zinc-800 dark:bg-zinc-50 dark:text-zinc-900 dark:hover:bg-zinc-200"
+                    aria-label={`Add ${product.name} - $${product.price.toFixed(2)} to cart`}
+                  >
                     Add to Cart
                   </button>
                 </div>
