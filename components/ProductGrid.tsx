@@ -1,7 +1,6 @@
 'use client';
 
 import Image from 'next/image';
-import { useState } from 'react';
 
 const products = [
   { id: 1, name: 'Original Octocat', image: '/images/products/original.png', description: 'The one that started it all' },
@@ -27,17 +26,14 @@ const products = [
 ];
 
 export default function ProductGrid() {
-  const [hoveredId, setHoveredId] = useState<number | null>(null);
-
   return (
     <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
       {products.map((product, index) => (
-        <div
+        <button
           key={product.id}
-          className="group relative animate-fadeInUp overflow-hidden rounded-2xl bg-white shadow-card transition-all duration-500 hover:scale-105 hover:shadow-cardHover"
-          style={{ animationDelay: `${index * 0.05}s` }}
-          onMouseEnter={() => setHoveredId(product.id)}
-          onMouseLeave={() => setHoveredId(null)}
+          className="group relative animate-fadeInUp overflow-hidden rounded-2xl bg-white shadow-card transition-all duration-500 hover:scale-105 hover:shadow-cardHover focus:scale-105 focus:shadow-cardHover focus:outline-none focus:ring-2 focus:ring-coral focus:ring-offset-2"
+          style={{ animationDelay: `${index * 0.05}s` } as React.CSSProperties}
+          aria-label={`View ${product.name}: ${product.description}`}
         >
           {/* Image Container */}
           <div className="relative aspect-square overflow-hidden bg-gradient-to-br from-peach/20 to-sky/20">
@@ -45,14 +41,12 @@ export default function ProductGrid() {
               src={product.image}
               alt={product.name}
               fill
-              className="object-contain p-6 transition-transform duration-500 group-hover:scale-110"
+              className="object-contain p-6 transition-transform duration-500 group-hover:scale-110 group-focus:scale-110"
               sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, (max-width: 1280px) 33vw, 25vw"
             />
             
             {/* Hover Overlay */}
-            <div className={`absolute inset-0 bg-gradient-to-t from-charcoal/95 via-charcoal/80 to-transparent transition-opacity duration-300 ${
-              hoveredId === product.id ? 'opacity-100' : 'opacity-0'
-            }`}>
+            <div className="absolute inset-0 bg-gradient-to-t from-charcoal/95 via-charcoal/80 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100 group-focus:opacity-100">
               <div className="absolute bottom-0 left-0 right-0 p-6 text-cream">
                 <p className="font-handwritten text-xl">{product.description}</p>
               </div>
@@ -60,7 +54,7 @@ export default function ProductGrid() {
           </div>
 
           {/* Product Info */}
-          <div className="p-4">
+          <div className="p-4 text-left">
             <h3 className="font-display text-xl font-semibold text-charcoal">
               {product.name}
             </h3>
@@ -74,7 +68,7 @@ export default function ProductGrid() {
           <div className="absolute right-4 top-4 flex h-10 w-10 items-center justify-center rounded-full bg-coral font-display text-sm font-bold text-white shadow-lg">
             {product.id}
           </div>
-        </div>
+        </button>
       ))}
     </div>
   );
