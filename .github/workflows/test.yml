@@ -1,4 +1,4 @@
-name: Test Web App
+name: Lint and Build
 
 on:
   push:
