@@ -1,6 +1,6 @@
 'use client';
 
-import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import React, { createContext, useContext, useState, useEffect, useRef, ReactNode } from 'react';
 import type { Product } from '../types/product';
 
 export interface CartItem extends Product {
@@ -57,30 +57,30 @@ export function CartProvider({ children }: { children: ReactNode }) {
   });
 
   // Track if initial load is complete to avoid writing back the same data we just loaded
-  const [isInitialized, setIsInitialized] = useState(false);
+  const isInitialized = useRef(false);
 
   useEffect(() => {
-    setIsInitialized(true);
+    isInitialized.current = true;
   }, []);
 
   // Save cart to localStorage whenever it changes (skip initial render)
   useEffect(() => {
-    if (isInitialized) {
+    if (isInitialized.current) {
       localStorage.setItem('octodeco-cart', JSON.stringify(items));
     }
-  }, [items, isInitialized]);
+  }, [items]);
 
   useEffect(() => {
-    if (isInitialized) {
+    if (isInitialized.current) {
       localStorage.setItem('octodeco-discount', discount.toString());
     }
-  }, [discount, isInitialized]);
+  }, [discount]);
 
   useEffect(() => {
-    if (isInitialized) {
+    if (isInitialized.current) {
       localStorage.setItem('octodeco-discount-code', discountCode);
     }
-  }, [discountCode, isInitialized]);
+  }, [discountCode]);
 
   const addToCart = (product: Product) => {
     setItems((currentItems) => {
