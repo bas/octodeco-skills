@@ -1,65 +1,58 @@
-import Image from "next/image";
+import Link from 'next/link';
 
 export default function Home() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
+    <div className="min-h-screen bg-zinc-50 dark:bg-black">
+      <div className="container mx-auto px-4 py-16">
+        <div className="max-w-4xl mx-auto text-center">
+          <div className="text-8xl mb-8">🐙</div>
+          <h1 className="text-5xl font-bold mb-6 text-black dark:text-white">
+            Welcome to Octocat Store
           </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+          <p className="text-xl text-gray-600 dark:text-gray-400 mb-12 max-w-2xl mx-auto">
+            Discover our amazing collection of Octocat merchandise. From classic figures to limited editions, find your perfect coding companion!
           </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+          <Link
+            href="/products"
+            className="inline-block px-8 py-4 bg-black dark:bg-white text-white dark:text-black rounded-lg font-semibold text-lg hover:bg-gray-800 dark:hover:bg-gray-200 transition-colors"
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+            Shop Now
+          </Link>
         </div>
-      </main>
+
+        <div className="mt-20 grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+          <div className="text-center p-6 bg-white dark:bg-zinc-900 rounded-lg">
+            <div className="text-4xl mb-4">🎨</div>
+            <h3 className="text-xl font-semibold mb-2 text-black dark:text-white">
+              Unique Designs
+            </h3>
+            <p className="text-gray-600 dark:text-gray-400">
+              Each Octocat has its own personality and style
+            </p>
+          </div>
+
+          <div className="text-center p-6 bg-white dark:bg-zinc-900 rounded-lg">
+            <div className="text-4xl mb-4">💎</div>
+            <h3 className="text-xl font-semibold mb-2 text-black dark:text-white">
+              Premium Quality
+            </h3>
+            <p className="text-gray-600 dark:text-gray-400">
+              High-quality merchandise for true developers
+            </p>
+          </div>
+
+          <div className="text-center p-6 bg-white dark:bg-zinc-900 rounded-lg">
+            <div className="text-4xl mb-4">🎁</div>
+            <h3 className="text-xl font-semibold mb-2 text-black dark:text-white">
+              Special Offers
+            </h3>
+            <p className="text-gray-600 dark:text-gray-400">
+              Use discount codes at checkout for great deals
+            </p>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
+
