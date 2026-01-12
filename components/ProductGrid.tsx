@@ -34,6 +34,10 @@ export default function ProductGrid() {
           className="group relative animate-fadeInUp overflow-hidden rounded-2xl bg-white shadow-card transition-all duration-500 hover:scale-105 hover:shadow-cardHover focus:scale-105 focus:shadow-cardHover focus:outline-none focus:ring-2 focus:ring-coral focus:ring-offset-2"
           style={{ animationDelay: `${index * 0.05}s` } as React.CSSProperties}
           aria-label={`View ${product.name}: ${product.description}`}
+          onClick={() => {
+            // Placeholder for future functionality (e.g., open product detail modal)
+            console.log(`Clicked on ${product.name}`);
+          }}
         >
           {/* Image Container */}
           <div className="relative aspect-square overflow-hidden bg-gradient-to-br from-peach/20 to-sky/20">
