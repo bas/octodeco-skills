@@ -21,7 +21,6 @@ export default function CartPage() {
   const [couponInput, setCouponInput] = useState('');
   const [couponError, setCouponError] = useState('');
   const [couponSuccess, setCouponSuccess] = useState('');
-  const [showCheckoutMessage, setShowCheckoutMessage] = useState(false);
 
   const subtotal = getSubtotal();
   const discountAmount = subtotal * discount;
@@ -233,27 +232,12 @@ export default function CartPage() {
               </div>
 
               {/* Checkout Button */}
-              <button
-                className="mt-6 w-full rounded-full bg-coral px-6 py-4 font-display text-lg font-semibold text-white transition-all duration-300 hover:scale-105 hover:bg-coral/90 focus:outline-none focus:ring-2 focus:ring-coral focus:ring-offset-2"
-                onClick={() => setShowCheckoutMessage(true)}
+              <Link
+                href="/checkout"
+                className="mt-6 w-full block text-center rounded-full bg-coral px-6 py-4 font-display text-lg font-semibold text-white transition-all duration-300 hover:scale-105 hover:bg-coral/90 focus:outline-none focus:ring-2 focus:ring-coral focus:ring-offset-2"
               >
                 Proceed to Checkout
-              </button>
-
-              {/* Checkout Message */}
-              {showCheckoutMessage && (
-                <div className="mt-4 rounded-lg bg-sky/20 border-2 border-sky p-4 text-center">
-                  <p className="font-body text-sm text-charcoal">
-                    Checkout functionality coming soon! 🚀
-                  </p>
-                  <button
-                    onClick={() => setShowCheckoutMessage(false)}
-                    className="mt-2 text-xs font-semibold text-coral hover:underline focus:outline-none"
-                  >
-                    Close
-                  </button>
-                </div>
-              )}
+              </Link>
 
               <Link
                 href="/products"
