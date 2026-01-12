@@ -53,9 +53,9 @@ export default function Home() {
               <p className="font-body text-sm text-charcoal/60">Skills & Characters</p>
             </div>
             <div className="flex gap-8">
-              <a href="#" className="font-body text-charcoal/70 transition-colors hover:text-charcoal">About</a>
-              <a href="#" className="font-body text-charcoal/70 transition-colors hover:text-charcoal">Collection</a>
-              <a href="#" className="font-body text-charcoal/70 transition-colors hover:text-charcoal">Contact</a>
+              <button className="font-body text-charcoal/70 transition-colors hover:text-charcoal">About</button>
+              <button className="font-body text-charcoal/70 transition-colors hover:text-charcoal">Collection</button>
+              <button className="font-body text-charcoal/70 transition-colors hover:text-charcoal">Contact</button>
             </div>
           </div>
           <div className="mt-8 border-t border-charcoal/10 pt-8 text-center">
