@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { CartProvider } from "@/contexts/CartContext";
+import MainLayout from "@/components/MainLayout";
 
 export const metadata: Metadata = {
   title: "OctoDeco Skills - GitHub Octocat Character Collection",
@@ -19,7 +21,9 @@ export default function RootLayout({
         <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700;9..144,800;9..144,900&family=Inter:wght@400;500;600&family=Caveat:wght@700&display=swap" rel="stylesheet" />
       </head>
       <body className="antialiased">
-        {children}
+        <CartProvider>
+          <MainLayout>{children}</MainLayout>
+        </CartProvider>
       </body>
     </html>
   );
