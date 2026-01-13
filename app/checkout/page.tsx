@@ -7,6 +7,10 @@ import { useCart } from '@/contexts/CartContext';
 import { useState, useEffect } from 'react';
 import type { ShippingAddress, BillingAddress } from '@/types/checkout';
 
+// Constants for pricing calculations
+const SHIPPING_COST = 10.00;
+const TAX_RATE = 0.08;
+
 export default function CheckoutPage() {
   const router = useRouter();
   const {
@@ -49,8 +53,8 @@ export default function CheckoutPage() {
   const subtotal = getSubtotal();
   const discountAmount = subtotal * discount;
   const total = subtotal - discountAmount;
-  const estimatedShipping = 10.00; // Fixed for demo
-  const tax = total * 0.08; // 8% tax for demo
+  const estimatedShipping = SHIPPING_COST;
+  const tax = total * TAX_RATE;
   const grandTotal = total + estimatedShipping + tax;
 
   const handleShippingChange = (field: keyof ShippingAddress, value: string) => {
@@ -62,22 +66,22 @@ export default function CheckoutPage() {
   };
 
   const isShippingValid = () => {
-    return shippingAddress.fullName && 
-           shippingAddress.email && 
-           shippingAddress.phone &&
-           shippingAddress.address && 
-           shippingAddress.city && 
-           shippingAddress.state && 
-           shippingAddress.zipCode;
+    return !!shippingAddress.fullName.trim() && 
+           !!shippingAddress.email.trim() && 
+           !!shippingAddress.phone.trim() &&
+           !!shippingAddress.address.trim() && 
+           !!shippingAddress.city.trim() && 
+           !!shippingAddress.state.trim() && 
+           !!shippingAddress.zipCode.trim();
   };
 
   const isBillingValid = () => {
     if (sameAsShipping) return true;
-    return billingAddress.fullName && 
-           billingAddress.address && 
-           billingAddress.city && 
-           billingAddress.state && 
-           billingAddress.zipCode;
+    return !!billingAddress.fullName.trim() && 
+           !!billingAddress.address.trim() && 
+           !!billingAddress.city.trim() && 
+           !!billingAddress.state.trim() && 
+           !!billingAddress.zipCode.trim();
   };
 
   const handleContinueToSummary = () => {
@@ -114,6 +118,7 @@ export default function CheckoutPage() {
                 <button
                   onClick={() => setShowSummary(false)}
                   className="font-body text-sm text-coral hover:underline focus:outline-none"
+                  aria-label="Edit shipping address"
                 >
                   Edit
                 </button>
@@ -137,6 +142,7 @@ export default function CheckoutPage() {
                 <button
                   onClick={() => setShowSummary(false)}
                   className="font-body text-sm text-coral hover:underline focus:outline-none"
+                  aria-label="Edit billing address"
                 >
                   Edit
                 </button>
@@ -293,6 +299,8 @@ export default function CheckoutPage() {
                       className="w-full rounded-lg border-2 border-charcoal/10 px-4 py-3 font-body focus:border-coral focus:outline-none"
                       placeholder="john@example.com"
                       required
+                      pattern="^[^\s@]+@[^\s@]+\.[^\s@]+$"
+                      title="Please enter a valid email address (for example, name@example.com)."
                     />
                   </div>
                   <div>
@@ -369,6 +377,9 @@ export default function CheckoutPage() {
                       className="w-full rounded-lg border-2 border-charcoal/10 px-4 py-3 font-body focus:border-coral focus:outline-none"
                       placeholder="94102"
                       required
+                      pattern="^\d{5}(-\d{4})?$"
+                      inputMode="numeric"
+                      title="Please enter a valid ZIP code (e.g., 12345 or 12345-6789)"
                     />
                   </div>
                 </div>
@@ -483,6 +494,9 @@ export default function CheckoutPage() {
                         className="w-full rounded-lg border-2 border-charcoal/10 px-4 py-3 font-body focus:border-coral focus:outline-none"
                         placeholder="94102"
                         required
+                        pattern="^\d{5}(-\d{4})?$"
+                        inputMode="numeric"
+                        title="Please enter a valid ZIP code (e.g., 12345 or 12345-6789)"
                       />
                     </div>
                   </div>
