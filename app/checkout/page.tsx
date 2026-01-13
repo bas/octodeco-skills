@@ -307,6 +307,8 @@ export default function CheckoutPage() {
                       className="w-full rounded-lg border-2 border-charcoal/10 px-4 py-3 font-body focus:border-coral focus:outline-none"
                       placeholder="(555) 123-4567"
                       required
+                      pattern="^[0-9+()\\s-]{7,20}$"
+                      title="Please enter a valid phone number (7–20 characters, digits, spaces, +, -, and parentheses)."
                     />
                   </div>
                 </div>
